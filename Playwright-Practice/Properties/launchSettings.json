@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Playwright-Practice.Tests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "PWDEBUG": "1"
+      }
+    }
+  }
+}
