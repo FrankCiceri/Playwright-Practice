@@ -30,7 +30,7 @@ namespace Playwright_Practice
             await _page.GotoAsync("https://www.epam.com");
         }
 
-        [TestCase("Java")]
+        [TestCase("Python")]
         public async Task Test1(string keyword)
         {
             var headerPage = new HeaderPage(_page);
