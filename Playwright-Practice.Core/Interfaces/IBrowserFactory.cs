@@ -1,4 +1,5 @@
 ﻿using Microsoft.Playwright;
+using Playwright_Practice.Core.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,8 @@ using System.Threading.Tasks;
 
 namespace Playwright_Practice.Core.Interfaces
 {
-    public interface IDriverContext : IAsyncDisposable
+    public interface IBrowserFactory
     {
-            IBrowserContext Context { get;  }
-
-            IPage Page { get; }
-
-            Task NavigateToAsync(string url);            
-        
+        Task<IBrowserDriver> CreateBrowserAsync();
     }
 }

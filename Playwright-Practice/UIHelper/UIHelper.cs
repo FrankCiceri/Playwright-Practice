@@ -11,8 +11,7 @@ namespace Playwright_Practice.UIHelper
     {
         public static async Task AcceptCookiesIfVisibleAsync(IPage page)
         {
-            var cookieBtn = page.Locator("#onetrust-accept-btn-handler");
-
+            var cookieBtn = page.GetByRole(AriaRole.Button, new() { Name = "Accept All"});
             if (await cookieBtn.IsVisibleAsync())
             {
                 await cookieBtn.ClickAsync();

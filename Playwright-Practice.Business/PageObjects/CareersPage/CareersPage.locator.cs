@@ -10,6 +10,6 @@ namespace Playwright_Practice.Business.PageObjects.CareersPage
     public partial class CareersPage
     {
         private ILocator CareerSearchTxtField => _page.Locator("#new_form_job_search-keyword");
-
+        private ILocator CareerSuggestionsMenu => _page.Locator("form#jobSearchFilterForm .autocomplete-suggestions");
     }
 }

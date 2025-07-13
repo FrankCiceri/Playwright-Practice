@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Playwright_Practice.Core.ArgumentValidator.ArgumentValidator;
 
 namespace Playwright_Practice.Business.PageObjects.CareersPage
 {
@@ -18,7 +19,17 @@ namespace Playwright_Practice.Business.PageObjects.CareersPage
 
         public async Task EnterSearchKeyword(string keyword)
         {
+            CheckArgumentIsNull(keyword, nameof(keyword));
 
+            try
+            {
+                await CareerSearchTxtField.FillAsync(keyword);
+                await CloseSuggestionsMenuIfVisible();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

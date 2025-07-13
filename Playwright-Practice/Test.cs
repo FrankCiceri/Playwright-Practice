@@ -1,5 +1,6 @@
 using Microsoft.Playwright;
 using Playwright_Practice.Business;
+using Playwright_Practice.Business.PageObjects.CareersPage;
 using Playwright_Practice.Business.PageObjects.HeaderPage;
 using Playwright_Practice.Core.Core;
 using Playwright_Practice.Core.Interfaces;
@@ -10,24 +11,36 @@ namespace Playwright_Practice
 {
     public class Tests
     {
-        private IDriverContext _context;
+        private IBrowserDriver _browserDriver;
+        private IBrowserContext _browserContext;
+        private IPage _page;
+
+        [OneTimeSetUp]
+        public async Task OneTimeSetUp()
+        {
+            var driverFactory = new BrowserFactory();
+            _browserDriver = await driverFactory.CreateBrowserAsync();
+        }
 
         [SetUp]
         public async Task Setup()
         {
-            var driverFactory = new DriverFactory();
-            _context = await driverFactory.CreateDriverAsync();
-            await _context.NavigateToAsync("https://www.epam.com");
+            _browserContext = await _browserDriver.Browser.NewContextAsync();
+            _page = await _browserContext.NewPageAsync();
+            await _page.GotoAsync("https://www.epam.com");
         }
 
-        [Test]
-        public async Task Test1()
+        [TestCase("Java")]
+        public async Task Test1(string keyword)
         {
-            var headerPage = new HeaderPage(_context.Page);
-            await UiHelpers.AcceptCookiesIfVisibleAsync(_context.Page);
+            var headerPage = new HeaderPage(_page);
+            await UiHelpers.AcceptCookiesIfVisibleAsync(_page);
             await headerPage.ClickCareersLink();
-            
-            
+
+            var careerPage = new CareersPage(_page);
+            await careerPage.EnterSearchKeyword(keyword);
+
+
         }
 
 
@@ -35,10 +48,18 @@ namespace Playwright_Practice
         [TearDown]
         public async Task TearDown()
         {
-            if (_context is not null)
+            if (_browserContext is not null)
             {
-                await _context.DisposeAsync();
-            }            
+                await _browserContext.CloseAsync();
+            }
         }
+
+        [OneTimeTearDown]
+        public async Task CloseAll()
+        {
+            await _browserDriver.DisposeAsync();
+        }
+
     }
+
 }

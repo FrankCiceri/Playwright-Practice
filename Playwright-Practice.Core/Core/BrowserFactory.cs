@@ -9,23 +9,16 @@ using System.Threading.Tasks;
 
 namespace Playwright_Practice.Core.Core
 {
-    public class DriverFactory : IDriverFactory
+    public class BrowserFactory : IBrowserFactory
     {
         
 
-        public async Task<IDriverContext> CreateDriverAsync()
+        public async Task<IBrowserDriver> CreateBrowserAsync()
         {
             var playwright = await Playwright.CreateAsync();
             var browser = await SelectBrowser(playwright, "chromium");
-            var context = await browser.NewContextAsync(new BrowserNewContextOptions
-            {
-                ViewportSize = ViewportSize.NoViewport,
-            });
-            var page = await context.NewPageAsync();
 
-            
-
-            return new DriverContext(browser, context, page, playwright);
+            return new BrowserDriver(browser, playwright);
         }
 
         private async Task<IBrowser> SelectBrowser(IPlaywright playwright, string browser)
@@ -36,7 +29,7 @@ namespace Playwright_Practice.Core.Core
                 {
                     Headless = false,
                     Channel = "chrome",
-                    Args = new[] { "--window-position=0,0", "--window-size=1920,1080" }
+                    Args = new List<string>() { "--start-maximized" }
                 }),
                 "firefox" => await playwright.Firefox.LaunchAsync(new BrowserTypeLaunchOptions()
                 {
