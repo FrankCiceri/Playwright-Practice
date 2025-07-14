@@ -25,7 +25,7 @@ namespace Playwright_Practice.Business.PageObjects.HeaderPage
                 await CareersButton.ClickAsync();
                 await _page.WaitForLoadStateAsync();
             }
-            catch (Exception ex) 
+            catch (Exception) 
             {
                 throw;
             }

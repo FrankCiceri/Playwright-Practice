@@ -31,5 +31,27 @@ namespace Playwright_Practice.Business.PageObjects.CareersPage
                 throw;
             }
         }
+
+        public async Task SelectLocationFromDropdown(string location)
+        {
+            CheckArgumentIsNull(location, nameof(location));
+            await DeployLocationDropdown();
+            await SelectDropdownLocation(location);
+        }
+
+        public async Task ClickRemoteCheckContainer()
+        {
+            try
+            {
+                while (!(await RemoteCheckbox.IsCheckedAsync()))
+                {
+                    await RemoteCheckContainer.ClickAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

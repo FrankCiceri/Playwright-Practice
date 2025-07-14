@@ -5,6 +5,7 @@ using Playwright_Practice.Business.PageObjects.HeaderPage;
 using Playwright_Practice.Core.Core;
 using Playwright_Practice.Core.Interfaces;
 using Playwright_Practice.UIHelper;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace Playwright_Practice
@@ -25,22 +26,28 @@ namespace Playwright_Practice
         [SetUp]
         public async Task Setup()
         {
-            _browserContext = await _browserDriver.Browser.NewContextAsync();
+            _browserContext = await _browserDriver.Browser.NewContextAsync(new BrowserNewContextOptions()
+            {
+                ViewportSize = ViewportSize.NoViewport
+            });
             _page = await _browserContext.NewPageAsync();
             await _page.GotoAsync("https://www.epam.com");
         }
 
-        [TestCase("Python")]
-        public async Task Test1(string keyword)
+        //[TestCase("Python", "Bogota")]
+        //[TestCase("Python", "Buenos Aires")]
+        [TestCase("Python", "Tokyo")]
+        public async Task Test1(string keyword, string location)
         {
-            var headerPage = new HeaderPage(_page);
             await UiHelpers.AcceptCookiesIfVisibleAsync(_page);
+
+            var headerPage = new HeaderPage(_page);            
             await headerPage.ClickCareersLink();
 
             var careerPage = new CareersPage(_page);
             await careerPage.EnterSearchKeyword(keyword);
-
-
+            await careerPage.SelectLocationFromDropdown(location);
+            await careerPage.ClickRemoteCheckContainer();
         }
 
 
