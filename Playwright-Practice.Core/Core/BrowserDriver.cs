@@ -17,7 +17,7 @@ namespace Playwright_Practice.Core.Core
         public BrowserDriver(IBrowser browser, IPlaywright playwright)
         {
             _browser = browser ?? throw new ArgumentNullException(nameof(browser));
-            _playwright = playwright ?? throw new ArgumentNullException(nameof(playwright));                     
+            _playwright = playwright ?? throw new ArgumentNullException(nameof(playwright));
            
         }
 
