@@ -19,12 +19,12 @@ namespace Playwright_Practice.Business.PageObjects.CareersPage
         });
 
         private ILocator LocationDropdown => _page.Locator("div.recruiting-search__location");
-
         private ILocator LocationDropdownOptions => _page.Locator(".select2-results");
         //private ILocator LocationElement(string location) => _page.Locator($"//li[contains(text(), '{location}')]");
         private ILocator LocationCityOption(string location) => _page.GetByRole(AriaRole.Option, new() { Name = location });
-
         private ILocator LocationCountryOption(string city) => LocationCityOption(city).Locator("xpath=ancestor::li[@aria-label]");
+
+        private ILocator JobSearchButton => _page.GetByRole(AriaRole.Button, new() { Name = "Find" });
 
      }
 }
