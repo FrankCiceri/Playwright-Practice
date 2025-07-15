@@ -1,4 +1,5 @@
 using Microsoft.Playwright;
+using Microsoft.Playwright.NUnit;
 using Playwright_Practice.Business;
 using Playwright_Practice.Business.PageObjects.CareersPage;
 using Playwright_Practice.Business.PageObjects.HeaderPage;
@@ -19,8 +20,8 @@ namespace Playwright_Practice
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
-            var driverFactory = new BrowserFactory();
-            _browserDriver = await driverFactory.CreateBrowserAsync();
+            var browserFactory = new BrowserFactory();
+            _browserDriver = await browserFactory.CreateBrowserAsync();
         }
 
         [SetUp]
@@ -34,9 +35,7 @@ namespace Playwright_Practice
             await _page.GotoAsync("https://www.epam.com");
         }
 
-        //[TestCase("Python", "Bogota")]
-        //[TestCase("Python", "Buenos Aires")]
-        [TestCase("Python", "Tokyo")]
+        [TestCase("Python", "Buenos Aires")]
         public async Task Test1(string keyword, string location)
         {
             await UiHelpers.AcceptCookiesIfVisibleAsync(_page);
@@ -48,6 +47,9 @@ namespace Playwright_Practice
             await careerPage.EnterSearchKeyword(keyword);
             await careerPage.SelectLocationFromDropdown(location);
             await careerPage.ClickRemoteCheckContainer();
+            await careerPage.ClickJobSearchButton();
+            
+            
         }
 
 
