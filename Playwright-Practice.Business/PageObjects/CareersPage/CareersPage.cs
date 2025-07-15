@@ -46,7 +46,20 @@ namespace Playwright_Practice.Business.PageObjects.CareersPage
                 while (!(await RemoteCheckbox.IsCheckedAsync()))
                 {
                     await RemoteCheckContainer.ClickAsync();
+                   
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task ClickJobSearchButton()
+        {
+            try
+            {
+                await JobSearchButton.ClickAsync();
             }
             catch (Exception)
             {
