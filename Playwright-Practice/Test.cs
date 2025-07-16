@@ -41,13 +41,14 @@ namespace Playwright_Practice
             await UiHelpers.AcceptCookiesIfVisibleAsync(_page);
 
             var headerPage = new HeaderPage(_page);            
-            await headerPage.ClickCareersLink();
+            await headerPage.HoverCareersLink();
+            await headerPage.ClickJoinOurTeamButton();
 
-            var careerPage = new CareersPage(_page);
-            await careerPage.EnterSearchKeyword(keyword);
-            await careerPage.SelectLocationFromDropdown(location);
-            await careerPage.ClickRemoteCheckContainer();
-            await careerPage.ClickJobSearchButton();
+            //var careerPage = new CareersPage(_page);
+            //await careerPage.EnterSearchKeyword(keyword);
+            //await careerPage.SelectLocationFromDropdown(location);
+            //await careerPage.ClickRemoteCheckContainer();
+            //await careerPage.ClickJobSearchButton();
             
             
         }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Playwright_Practice.Business.PageObjects.HeaderPage
@@ -18,17 +19,13 @@ namespace Playwright_Practice.Business.PageObjects.HeaderPage
 
         }
 
-        public async Task ClickCareersLink()
+
+        public async Task NavigateToJoinOurTeamPage()
         {
-            try
-            {                
-                await CareersButton.ClickAsync();
-                await _page.WaitForLoadStateAsync();
-            }
-            catch (Exception) 
-            {
-                throw;
-            }
+            await HoverCareersLink();  
+            await ClickJoinOurTeamButton();
         }
+
+
     }
 }
