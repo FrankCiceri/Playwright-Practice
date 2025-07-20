@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Playwright_Practice.Core.ArgumentValidator
+namespace Playwright_Practice.Core.Utils.ArgumentValidator
 {
     public static class ArgumentValidator
     {
