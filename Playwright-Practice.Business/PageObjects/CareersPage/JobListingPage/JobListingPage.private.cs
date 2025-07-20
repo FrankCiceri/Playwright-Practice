@@ -11,9 +11,8 @@ using System.Threading.Tasks;
 
 namespace Playwright_Practice.Business.PageObjects.CareersPage
 {
-    public partial class CareersPage
+    public partial class JobListingPage
     {
-        
         private ISearchable? _jobSearchFilter;
 
         private ISearchable JobSearchFilter
@@ -24,5 +23,6 @@ namespace Playwright_Practice.Business.PageObjects.CareersPage
                 return _jobSearchFilter;
             }
         }
+
     }
 }
