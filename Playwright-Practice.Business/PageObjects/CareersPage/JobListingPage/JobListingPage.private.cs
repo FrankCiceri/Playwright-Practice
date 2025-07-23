@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Playwright_Practice.Business.PageObjects.CareersPage
+namespace Playwright_Practice.Business.PageObjects.CareersPage.JobListingPage
 {
     public partial class JobListingPage
     {
@@ -24,5 +24,35 @@ namespace Playwright_Practice.Business.PageObjects.CareersPage
             }
         }
 
+        private int _loadedPositions;
+
+        private async Task<int> GetNumberOfPositionsLoaded()
+        {
+           return await JobList.CountAsync();
+        }
+
+        private async Task ClickDateSortButton()
+        {
+            await ClickAsync(SortByDateBtn);
+        }
+
+        private async Task ApplytoCurrentPosition(ILocator positionLocator)
+        {
+           var applyBtn = ApplyBtn(positionLocator);
+           await ClickAsync(applyBtn);
+        }
+
+        private async Task<ILocator> GetNthPosition(int positionIndex)
+        {
+            var positionsLoaded = await GetNumberOfPositionsLoaded();
+            if (positionIndex < 0 && positionIndex > positionsLoaded - 1)
+            {
+                throw new IndexOutOfRangeException($"Select a valid index for the job positions loaded: {nameof(positionIndex)}" );
+            }
+
+            var position = JobList.Nth(positionIndex);
+            return position;
+        }
+                
     }
 }

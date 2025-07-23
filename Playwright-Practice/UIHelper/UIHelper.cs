@@ -15,7 +15,7 @@ namespace Playwright_Practice.UIHelper
             if (await cookieBtn.IsVisibleAsync())
             {
                 await cookieBtn.ClickAsync();
-                await cookieBtn.WaitForAsync(new() { State = WaitForSelectorState.Hidden });
+                await cookieBtn.WaitForAsync(new() { State = WaitForSelectorState.Hidden, Timeout = 5000});
             }
         }
     }

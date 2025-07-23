@@ -2,6 +2,7 @@ using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using Playwright_Practice.Business;
 using Playwright_Practice.Business.PageObjects.CareersPage;
+using Playwright_Practice.Business.PageObjects.CareersPage.JobListingPage;
 using Playwright_Practice.Business.PageObjects.HomePage;
 using Playwright_Practice.Core.Core;
 using Playwright_Practice.Core.Interfaces;
@@ -41,12 +42,14 @@ namespace Playwright_Practice
         {            
 
             var homePage = new HomePage(_page);
-            await homePage.NavigateToCareersPageFromHeader();
-            
+            await homePage.NavigateToCareersPageFromHeader();            
 
             var careerPage = new CareersPage(_page);
             await careerPage.SearchJobByFilterRemote(keyword, location);
 
+            var jobListingPage = new JobListingPage(_page);
+            await jobListingPage.SortByDate();
+            await jobListingPage.ApplyToFirstPositionInList();
 
         }
 
