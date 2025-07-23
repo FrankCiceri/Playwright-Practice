@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Playwright_Practice.Business.PageObjects.CareersPage
+namespace Playwright_Practice.Business.PageObjects.CareersPage.JobListingPage
 {
     public partial class JobListingPage : BasePage
     {
@@ -17,6 +17,18 @@ namespace Playwright_Practice.Business.PageObjects.CareersPage
         public async Task SearchJobByFilterRemote(string keyword, string location)
         {
             await JobSearchFilter.SearchJobs(keyword, location, true);
+        }
+
+        public async Task SortByDate()
+        {
+            await ClickDateSortButton();
+        }
+
+        public async Task ApplyToFirstPositionInList()
+        {
+            var first = 0;
+            var position = await GetNthPosition(first);
+            await ApplytoCurrentPosition(position);
         }
     }
 }
