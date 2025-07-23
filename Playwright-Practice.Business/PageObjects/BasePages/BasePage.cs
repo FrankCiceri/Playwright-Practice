@@ -40,7 +40,7 @@ namespace Playwright_Practice.Business.PageObjects.BasePages
             return await Page.TitleAsync();
         }
 
-        public async Task<string> GetPageUrlAsync()
+        public string GetPageUrlAsync()
         {
             return Page.Url;
         }
